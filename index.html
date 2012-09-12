@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8"/>
+        <title>OpenConvert</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <div class="form">
+            <select>
+                <option>Sélectionner votre convertion</option>
+                <optgroup label="Base 64">
+                    <option data-function="base64_decode">Décoder un texte en base64</option>
+                    <option data-function="base64_encode">Encoder un texte en base64</option>
+                </optgroup>
+                <optgroup label="Beautifier">
+                    <option data-function="js_beautify">Embellir un Javascript</option>
+                    <option data-function="css_beautify">Embellir un CSS</option>
+                    <option data-function="style_html" data-options='{"max_char": "0", "brace_style": "expand", "unformatted": ["b", "i", "u"]}'>Embellir un HTML</option>
+                </optgroup>
+                <optgroup label="HTML">
+                    <option data-function="html_entity_decode">Décoder les entitées HTML</option>
+                    <option data-function="htmlspecialchars">Encoder les entitées HTML</option>
+                </optgroup>
+                <optgroup label="Url">
+                    <option data-function="urldecode">Décoder une URL</option>
+                    <option data-function="urlencode">Encoder une URL</option>
+                </optgroup>
+            </select>
+            <button class="convert">Convertir</button>
+            <button class="get">Récupérer le texte</button>
+            <button class="select">Sélectionner le texte</button>
+            <textarea></textarea>
+        </div>
+        <div class="result"><pre></pre></div>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/base64.js"></script>
+        <script type="text/javascript" src="js/url.js"></script>
+        <script type="text/javascript" src="js/beautiful.js"></script>
+        <script type="text/javascript" src="js/html.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('textarea').focus();
+                $('button.convert').click(function(){
+                    var callback = $('option:selected').attr('data-function');
+                    var options = $('option:selected').attr('data-options');
+                    var text = $('textarea').val();
+                    if (callback) {
+                        var fn = window[callback];
+                        if (options) {
+                            var value = fn(text, $.parseJSON(options));
+                        } else {
+                            var value = fn(text);
+                        }
+                        $('.result pre').html($('<div/>').text(value).html());
+                        $('.result').show();
+                    }
+                });
+                
+                $('button.get').click(function(){
+                    $('textarea').val($('<div/>').html($('.result pre').html()).text());
+                });
+                
+                $('button.select').click(function(){
+                    $('.result pre').select();
+                });
+            });
+        </script>
+    </body>
+</html>
