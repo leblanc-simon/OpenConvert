@@ -11,4 +11,4 @@ A web interface with many tools to convert text.
 # Compile
 
 * use utils/build_html.sh to build HTML page in the ressource directory
-* cd src && qmake QOpenConvert.pro && make
+* cd bin && qmake ../src/QOpenConvert.pro && make
