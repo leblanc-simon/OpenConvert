@@ -1,1 +1,4 @@
 *komodo*
+bin/*
+src/QOpenConvert.pro.user
+src/ressources/index.html
