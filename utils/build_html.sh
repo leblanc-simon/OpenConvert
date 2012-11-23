@@ -14,6 +14,7 @@ fi
 cat ${WEB_DIR}js/jquery.min.js > ${TMP_DIR}build.js
 cat ${WEB_DIR}js/base64.js >> ${TMP_DIR}build.js
 cat ${WEB_DIR}js/url.js >> ${TMP_DIR}build.js
+cat ${WEB_DIR}js/hash.js >> ${TMP_DIR}build.js
 cat ${WEB_DIR}js/beautiful.js >> ${TMP_DIR}build.js
 cat ${WEB_DIR}js/html.js >> ${TMP_DIR}build.js
 
@@ -38,6 +39,7 @@ cat ${WEB_DIR}index.html > ${TMP_DIR}index.html
 perl -pi -e "s/<script type=\"text\/javascript\" src=\"js\/jquery\.min\.js\"><\/script>//msg" ${TMP_DIR}index.html
 perl -pi -e "s/<script type=\"text\/javascript\" src=\"js\/base64\.js\"><\/script>//msg" ${TMP_DIR}index.html
 perl -pi -e "s/<script type=\"text\/javascript\" src=\"js\/url\.js\"><\/script>//msg" ${TMP_DIR}index.html
+perl -pi -e "s/<script type=\"text\/javascript\" src=\"js\/hash\.js\"><\/script>//msg" ${TMP_DIR}index.html
 perl -pi -e "s/<script type=\"text\/javascript\" src=\"js\/beautiful\.js\"><\/script>//msg" ${TMP_DIR}index.html
 html_content=`cat ${TMP_DIR}index.html`
 search_js="<script type=\"text/javascript\" src=\"js/html.js\"></script>"
