@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui webkit
+QT       += core widgets webkitwidgets
 
 TARGET = QOpenConvert
 TEMPLATE = app

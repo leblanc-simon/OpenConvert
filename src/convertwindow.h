@@ -20,7 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #define ConvertWindow_H
 
 #include <QMainWindow>
-#include <QtGui/QWidget>
+#include <QWidget>
 #include <QWebElement>
 #include <QSystemTrayIcon>
 
