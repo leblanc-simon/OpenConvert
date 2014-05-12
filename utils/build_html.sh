@@ -17,6 +17,7 @@ cat ${WEB_DIR}js/url.js >> ${TMP_DIR}build.js
 cat ${WEB_DIR}js/hash.js >> ${TMP_DIR}build.js
 cat ${WEB_DIR}js/beautiful.js >> ${TMP_DIR}build.js
 cat ${WEB_DIR}js/ip.js >> ${TMP_DIR}build.js
+cat ${WEB_DIR}js/quoted.printable.js >> ${TMP_DIR}build.js
 cat ${WEB_DIR}js/html.js >> ${TMP_DIR}build.js
 
 java -jar ${SCRIPT_DIRECTORY}/yuicompressor-2.4.7.jar --charset utf-8 --type js -o ${TMP_DIR}scripts.min.js ${TMP_DIR}build.js
@@ -43,6 +44,7 @@ perl -pi -e "s/<script type=\"text\/javascript\" src=\"js\/url\.js\"><\/script>/
 perl -pi -e "s/<script type=\"text\/javascript\" src=\"js\/hash\.js\"><\/script>//msg" ${TMP_DIR}index.html
 perl -pi -e "s/<script type=\"text\/javascript\" src=\"js\/beautiful\.js\"><\/script>//msg" ${TMP_DIR}index.html
 perl -pi -e "s/<script type=\"text\/javascript\" src=\"js\/ip\.js\"><\/script>//msg" ${TMP_DIR}index.html
+perl -pi -e "s/<script type=\"text\/javascript\" src=\"js\/quoted\.printable\.js\"><\/script>//msg" ${TMP_DIR}index.html
 html_content=`cat ${TMP_DIR}index.html`
 search_js="<script type=\"text/javascript\" src=\"js/html.js\"></script>"
 replace_js="<script type=\"text/javascript\">${js_content}</script>"
