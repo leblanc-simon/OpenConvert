@@ -22,6 +22,10 @@
                     <option data-function="md5">Hasher en MD5</option>
                     <option data-function="sha1">Hasher en SHA-1</option>
                 </optgroup>
+                <optgroup label="Hex">
+                    <option data-function="a2hex">Encoder une chaîne ASCII en hexadécimal</option>
+                    <option data-function="hex2a">Décoder un hexadécimal en chaîne ASCII</option>
+                </optgroup>
                 <optgroup label="HTML">
                     <option data-function="html_entity_decode">Décoder les entitées HTML</option>
                     <option data-function="htmlspecialchars">Encoder les entitées HTML</option>
@@ -57,6 +61,7 @@
         <script type="text/javascript" src="js/quoted.printable.js"></script>
         <script type="text/javascript" src="js/serialize.js"></script>
         <script type="text/javascript" src="js/html.js"></script>
+        <script type="text/javascript" src="js/hex.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
                 $('textarea').focus();
@@ -75,11 +80,11 @@
                         $('.result').show();
                     }
                 });
-                
+
                 $('button.get').click(function(){
                     $('textarea').val($('<div/>').html($('.result pre').html()).text());
                 });
-                
+
                 $('button.select').click(function(){
                     $('.result pre').select();
                 });
