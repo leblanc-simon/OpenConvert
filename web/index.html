@@ -48,47 +48,51 @@
             </select>
             <button class="convert">Convertir</button>
             <button class="get">Récupérer le texte</button>
-            <button class="select">Sélectionner le texte</button>
-            <textarea></textarea>
         </div>
+        <textarea></textarea>
         <div class="result"><pre></pre></div>
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/base64.js"></script>
-        <script type="text/javascript" src="js/url.js"></script>
-        <script type="text/javascript" src="js/hash.js"></script>
-        <script type="text/javascript" src="js/beautiful.js"></script>
-        <script type="text/javascript" src="js/ip.js"></script>
-        <script type="text/javascript" src="js/quoted.printable.js"></script>
-        <script type="text/javascript" src="js/serialize.js"></script>
-        <script type="text/javascript" src="js/html.js"></script>
-        <script type="text/javascript" src="js/hex.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $('textarea').focus();
-                $('button.convert').click(function(){
-                    var callback = $('option:selected').attr('data-function');
-                    var options = $('option:selected').attr('data-options');
-                    var text = $('textarea').val();
-                    if (callback) {
-                        var fn = window[callback];
-                        if (options) {
-                            var value = fn(text, $.parseJSON(options));
-                        } else {
-                            var value = fn(text);
-                        }
-                        $('.result pre').html($('<div/>').text(value).html());
-                        $('.result').show();
-                    }
-                });
+        <script src="js/base64.js"></script>
+        <script src="js/url.js"></script>
+        <script src="js/hash.js"></script>
+        <script src="js/beautiful.js"></script>
+        <script src="js/ip.js"></script>
+        <script src="js/quoted.printable.js"></script>
+        <script src="js/serialize.js"></script>
+        <script src="js/html.js"></script>
+        <script src="js/hex.js"></script>
+        <script>
+            document.querySelector('textarea').focus();
+            document.querySelector('button.convert').addEventListener('click', () => {
+                const optionSelected = document.querySelector('option:checked');
+                if (
+                    !optionSelected ||
+                    !optionSelected.dataset ||
+                    !optionSelected.dataset.function ||
+                    !window[optionSelected.dataset.function] ||
+                    typeof window[optionSelected.dataset.function] !== 'function'
+                ) {
+                    return;
+                }
 
-                $('button.get').click(function(){
-                    $('textarea').val($('<div/>').html($('.result pre').html()).text());
-                });
+                const text = document.querySelector('textarea').value;
+                const fn = window[optionSelected.dataset.function];
 
-                $('button.select').click(function(){
-                    $('.result pre').select();
-                });
-            });
+                let result;
+                if (optionSelected.dataset.options) {
+                    result = fn(text, JSON.parse(optionSelected.dataset.options));
+                } else {
+                    result = fn(text);
+                }
+
+                const divResult = document.querySelector('.result');
+                divResult.querySelector('pre').innerText = result;
+                divResult.style.display = 'block';
+
+            }, false);
+
+            document.querySelector('button.get').addEventListener('click', () => {
+                document.querySelector('textarea').value = document.querySelector('.result pre').innerText;
+            }, false);
         </script>
     </body>
 </html>
